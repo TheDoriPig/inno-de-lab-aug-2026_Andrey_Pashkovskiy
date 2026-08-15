@@ -4,4 +4,4 @@ SELECT
 	c.age,
 	c.country 
 FROM customers c
-WHERE c.country = 'USA'
+WHERE c.country = 'USA' and c.age > 25
