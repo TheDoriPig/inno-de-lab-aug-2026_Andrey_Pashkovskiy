@@ -1,3 +1,4 @@
+--Select project names where Bob Johnson worked more than 150 hours
 SELECT 
 	p.projectname 
 FROM projects p 
@@ -6,7 +7,7 @@ JOIN employees e ON ep.employeeid = e.employeeid
 WHERE e.firstname = 'Bob' AND e.lastname = 'Johnson' AND ep.hoursworked > 150;
 
 --------------------------------------------------------------------------------
-
+--Increase the budget by 10% for projects that have IT department employees assigned
 UPDATE projects p 
 SET Budget = Budget * 1.10
 WHERE EXISTS (
@@ -16,24 +17,22 @@ WHERE EXISTS (
 	WHERE ep.projectid = p.projectid AND e.department = 'IT'
 );
 
+--Retrieve project IDs, names, and budgets to verify the budget update
 SELECT p.projectid, p.projectname, p.budget 
 FROM projects p;
 
 --------------------------------------------------------------------------------
-
-UPDATE projects 
-SET enddate = NULL
-WHERE projectid = 4;
-
+--Set the project enddate a year later startdate if enddate is NULL
 UPDATE projects
 SET enddate = startdate + INTERVAL '1 year'
 WHERE enddate IS NULL 
 
+--Checking update
 SELECT p.projectid, p.projectname, p.startdate, p.enddate 
 FROM projects p 
 
 --------------------------------------------------------------------------------
-
+--Executed the transaction to add a new employee and assign them to a project
 BEGIN;
 	WITH new_employee AS (
 	INSERT INTO employees (firstname, lastname, department, salary, email) VALUES
@@ -50,8 +49,8 @@ BEGIN;
 	CROSS JOIN projects p 
 	WHERE p.projectname = 'Website Redesign';
 COMMIT;
-ROLLBACK;
 
+--Checking transaction
 SELECT e.firstname, e.lastname, p.projectname, ep.hoursworked
 FROM employeeprojects ep
 JOIN employees e ON ep.employeeid = e.employeeid

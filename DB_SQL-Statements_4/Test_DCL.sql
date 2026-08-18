@@ -1,3 +1,4 @@
+--Tests for Task 3
 SELECT * FROM Employees;
 
 INSERT INTO Employees (FirstName, LastName, Department, Salary, Email) VALUES
