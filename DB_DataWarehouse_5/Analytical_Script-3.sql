@@ -3,17 +3,18 @@ SELECT
     dd.full_date AS Date,
     SUM(foi.total_price)
 FROM fact_order_items foi
-JOIN orders o ON foi.order_id = o.order_id
-JOIN dim_date dd ON o.date_key = dd.date_id
+JOIN dim_date dd 
+	ON foi.date_id = dd.date_id
 GROUP BY dd.full_date
-ORDER BY dd.full_date;
+ORDER BY SUM(foi.total_price) DESC;
+
 
 --Or the highest sales volume
 SELECT 
     dd.full_date AS Date,
     SUM(foi.quantity)
 FROM fact_order_items foi
-JOIN orders o ON foi.order_id = o.order_id
-JOIN dim_date dd ON o.date_key = dd.date_id
+JOIN dim_date dd 
+	ON foi.date_id = dd.date_id
 GROUP BY dd.full_date
-ORDER BY dd.full_date;
+ORDER BY SUM(foi.quantity) DESC;
