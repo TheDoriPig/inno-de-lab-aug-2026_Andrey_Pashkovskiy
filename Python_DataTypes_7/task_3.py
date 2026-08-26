@@ -9,12 +9,16 @@ db_config = {
 
 # Ваш код здесь
 
+# Extract host and port from connection
 db_host = db_config.get("connection").get("host")
 db_port = db_config.get("connection").get("port")
 
+# Check for ssl_settings and ssl_mode with a default value
 db_ssl_settings = db_config.get("ssl_setting", {}).get("ssl_mode", "verify-full")
 
+# Update user to admin
 db_config["connection"]["user"] = "admin"
+# Add max_connections parameter
 db_config["connection"]["max_connections"] = 100
 
 print(f"SSL Mode: {db_ssl_settings}")
