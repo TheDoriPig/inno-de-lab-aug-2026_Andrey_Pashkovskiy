@@ -14,7 +14,7 @@ db_host = db_config.get("connection").get("host")
 db_port = db_config.get("connection").get("port")
 
 # Check for ssl_settings and ssl_mode with a default value
-db_ssl_settings = db_config.get("ssl_setting", {}).get("ssl_mode", "verify-full")
+db_ssl_settings = db_config.get("ssl_settings", {}).get("ssl_mode", "verify-full")
 
 # Update user to admin
 db_config["connection"]["user"] = "admin"
