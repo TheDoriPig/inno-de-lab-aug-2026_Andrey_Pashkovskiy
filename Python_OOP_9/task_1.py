@@ -58,6 +58,8 @@ class Trainee:
 # 1. Создание стажера с начальным баллом 9 и проходным баллом 10
 trainee = Trainee(name="Иван", surname="Иванов", score=9, passing_grade=10)
 
+print("=== ПРОВЕРКА УСПЕВАЕМОСТИ СТАЖЕРА ===")
+
 # 2. Выполнение домашнего задания и проверка статуса
 trainee.do_homework()
 print(f"Баллы: {trainee.score}, Прошел курс: {trainee.is_passing()}")
